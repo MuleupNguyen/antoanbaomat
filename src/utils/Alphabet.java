@@ -62,6 +62,34 @@ public class Alphabet {
     public static String valueInVN2(int index) {
         return String.valueOf(matrixVN2[index]);
     }
+    public static String[][] generateVigenereTableEnglish() {
+        int numRows = Alphabet.sizeEnglish2;
+        int numCols = Alphabet.sizeEnglish2;
+
+        String[][] table = new String[numRows][numCols];
+
+        for (int i = 0; i < numRows; i++) {
+            for (int j = 0; j < numCols; j++) {
+                table[i][j] = Alphabet.valueInEnglish2((i + j) % Alphabet.sizeEnglish2);
+            }
+        }
+
+        return table;
+    }
+        public static String[][] generateVigenereTableVN() {
+        int numRows = Alphabet.sizeVN2;
+        int numCols = Alphabet.sizeVN2;
+
+        String[][] table = new String[numRows][numCols];
+
+        for (int i = 0; i < numRows; i++) {
+            for (int j = 0; j < numCols; j++) {
+                table[i][j] = Alphabet.valueInVN2((i + j) % Alphabet.sizeVN2);
+            }
+        }
+
+        return table;
+    }
 
     public static void main(String[] args) {
         System.out.println(Alphabet.indexInEnglish('z'));

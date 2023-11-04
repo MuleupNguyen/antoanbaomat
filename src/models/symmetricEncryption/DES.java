@@ -9,7 +9,6 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.security.NoSuchAlgorithmException;
-import java.util.Arrays;
 import java.util.Base64;
 
 public class DES {
@@ -51,6 +50,7 @@ public class DES {
     }
 
     public String encryptBase64(String text) throws Exception {
+        System.out.println("encrypt: " + paddingMode);
         if (key == null) {
             return "";
         }
@@ -62,6 +62,7 @@ public class DES {
     }
 
     public void encryptFile(String sourceFile, String desFile) throws Exception {
+
         if (key == null) {
             throw new FileNotFoundException("key not found");
         }
@@ -110,6 +111,7 @@ public class DES {
     }
 
     public String decrypt(byte[] text) throws Exception {
+
         if (key == null) {
             return null;
         }
@@ -122,6 +124,7 @@ public class DES {
     }
 
     public String decryptBase64(String text) throws Exception {
+        System.out.println("decrypt: " + paddingMode);
         if (key == null) {
             return null;
         }

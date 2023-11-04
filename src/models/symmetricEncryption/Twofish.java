@@ -6,14 +6,11 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.security.NoSuchAlgorithmException;
-import java.security.Provider;
-import java.security.Security;
 import java.util.Base64;
 import javax.crypto.Cipher;
 import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
-import org.bouncycastle.jce.provider.BouncyCastleProvider;
 
 public class Twofish {
        
@@ -142,17 +139,5 @@ public class Twofish {
         } else {
             return null;
         }
-    }
-    public static void main(String[] args) throws Exception {
-//        Provider bcProvider = new BouncyCastleProvider();
-//        Security.addProvider(bcProvider);
-        Twofish twofish = new Twofish();
-        twofish.createKey();
-        
-        twofish.setPaddingMode("PKCS5","ECB");
-        
-        String text = "Nguyen DU Lap";
-        String encrypt = twofish.encryptBase64(text);
-        System.out.println(encrypt);
     }
 }

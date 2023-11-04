@@ -560,6 +560,8 @@ public class BlowfishFileForm extends javax.swing.JPanel {
     private void jButtonSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSaveActionPerformed
         String key = jTFKey.getText().trim();
         int keySize = Integer.parseInt(jCBSizeKey.getSelectedItem().toString());
+        String mode = jCBMode.getSelectedItem().toString();
+        String padding = jCBPadding.getSelectedItem().toString();
         if (key.isBlank()) {
             JOptionPane.showMessageDialog(this, "Vui lòng nhập key.", "Lỗi", JOptionPane.ERROR_MESSAGE);
         } else {
@@ -567,6 +569,8 @@ public class BlowfishFileForm extends javax.swing.JPanel {
             dialog.setType("Blowfish");
             dialog.setKey(key);
             dialog.setKeySize(keySize);
+            dialog.setMode(mode);
+            dialog.setPadding(padding);
             dialog.setLocationRelativeTo(null);
             dialog.setVisible(true);
 

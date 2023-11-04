@@ -342,20 +342,20 @@ public class DESFileForm extends javax.swing.JPanel {
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addGap(15, 15, 15)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jBFileOutput, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addComponent(jLabel5)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGap(245, 245, 245))))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(3, 3, 3)
                 .addComponent(jBFileOutput, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
         jBFileInput.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -462,13 +462,17 @@ public class DESFileForm extends javax.swing.JPanel {
     private void jButtonSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSaveActionPerformed
         String key = jTFKey.getText().trim();
         int keySize = Integer.parseInt(jCBSizeKey.getSelectedItem().toString());
+        String mode = jCBMode.getSelectedItem().toString();
+        String padding = jCBPadding.getSelectedItem().toString();
         if (key.isBlank()) {
             JOptionPane.showMessageDialog(this, "Vui lòng nhập key.", "Lỗi", JOptionPane.ERROR_MESSAGE);
         } else {
             DialogAddKey dialog = new DialogAddKey((JFrame) SwingUtilities.getWindowAncestor(this), true);
-            dialog.setType("AES");
+            dialog.setType("DES");
             dialog.setKey(key);
             dialog.setKeySize(keySize);
+            dialog.setMode(mode);
+            dialog.setPadding(padding);
             dialog.setLocationRelativeTo(null);
             dialog.setVisible(true);
 
@@ -477,7 +481,7 @@ public class DESFileForm extends javax.swing.JPanel {
 
     private void jButtonUpKeyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonUpKeyActionPerformed
         DialogShowKey dialog = new DialogShowKey((JFrame) SwingUtilities.getWindowAncestor(this), true);
-        dialog.setType("AES");
+        dialog.setType("DES");
         dialog.setLocationRelativeTo(null);
         dialog.setVisible(true);
         KeyModel keyTarget = dialog.getKeyTarget();

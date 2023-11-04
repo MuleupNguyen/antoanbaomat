@@ -4,7 +4,6 @@ import views.component.DefaultForm;
 import java.awt.Component;
 import java.security.Provider;
 import java.security.Security;
-import javax.swing.UIManager;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 import views.component.AESFileForm;
 import views.component.AESForm;
@@ -13,6 +12,8 @@ import views.component.BlowfishForm;
 import views.component.DESFileForm;
 import views.component.DESForm;
 import views.component.HillForm;
+import views.component.TwofishForm;
+import views.component.VigenereFileForm;
 import views.component.VigenereForm;
 import views.menu.MenuEvent;
 
@@ -31,6 +32,8 @@ public class Main extends javax.swing.JFrame {
                 }
                 if (index == 0 && subIndex == 1) {
                     showForm(new VigenereForm());
+                } else if (index == 0 && subIndex == 2) {
+                    showForm(new VigenereFileForm());
                 } else if (index == 0 && subIndex == 3) {
                     showForm(new HillForm());
                 } else if (index == 0 && subIndex == 4) {
@@ -46,6 +49,10 @@ public class Main extends javax.swing.JFrame {
                 } else if (index == 0 && subIndex == 9) {
                     showForm(new BlowfishForm());
                 } else if (index == 0 && subIndex == 10) {
+                    showForm(new BlowfishFileForm());
+                } else if (index == 0 && subIndex == 11) {
+                    showForm(new TwofishForm());
+                } else if (index == 0 && subIndex == 12) {
                     showForm(new BlowfishFileForm());
                 }
             }
