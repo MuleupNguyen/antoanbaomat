@@ -10,6 +10,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.security.NoSuchAlgorithmException;
 import java.util.Base64;
+import javax.crypto.spec.IvParameterSpec;
 
 public class AES {
 
@@ -43,7 +44,11 @@ public class AES {
             return new byte[]{};
         }
         Cipher cipher = Cipher.getInstance("AES" + paddingMode);
-        cipher.init(Cipher.ENCRYPT_MODE, key);
+        if (paddingMode.contains("ECB")) {
+            cipher.init(Cipher.ENCRYPT_MODE, key);
+        } else {
+            cipher.init(Cipher.ENCRYPT_MODE, key, new IvParameterSpec(new byte[16]));
+        }
         byte[] plainText = text.getBytes("UTF-8");
         byte[] cipherText = cipher.doFinal(plainText);
         return cipherText;
@@ -54,7 +59,11 @@ public class AES {
             return "";
         }
         Cipher cipher = Cipher.getInstance("AES" + paddingMode);
-        cipher.init(Cipher.ENCRYPT_MODE, key);
+        if (paddingMode.contains("ECB")) {
+            cipher.init(Cipher.ENCRYPT_MODE, key);
+        } else {
+            cipher.init(Cipher.ENCRYPT_MODE, key, new IvParameterSpec(new byte[16]));
+        }
         byte[] plainText = text.getBytes("UTF-8");
         byte[] cipherText = cipher.doFinal(plainText);
         return Base64.getEncoder().encodeToString(cipherText);
@@ -67,7 +76,11 @@ public class AES {
         File file = new File(sourceFile);
         if (file.isFile()) {
             Cipher cipher = Cipher.getInstance("AES" + paddingMode);
-            cipher.init(Cipher.ENCRYPT_MODE, key);
+            if (paddingMode.contains("ECB")) {
+                cipher.init(Cipher.ENCRYPT_MODE, key);
+            } else {
+                cipher.init(Cipher.ENCRYPT_MODE, key, new IvParameterSpec(new byte[16]));
+            }
             FileInputStream fis = new FileInputStream(file);
             FileOutputStream fos = new FileOutputStream(desFile);
             byte[] input = new byte[64];
@@ -91,7 +104,11 @@ public class AES {
         File file = new File(sourceFile);
         if (file.isFile()) {
             Cipher cipher = Cipher.getInstance("AES" + paddingMode);
-            cipher.init(Cipher.DECRYPT_MODE, key);
+            if (paddingMode.contains("ECB")) {
+                cipher.init(Cipher.DECRYPT_MODE, key);
+            } else {
+                cipher.init(Cipher.DECRYPT_MODE, key, new IvParameterSpec(new byte[16]));
+            }
             FileInputStream fis = new FileInputStream(file);
             FileOutputStream fos = new FileOutputStream(desFile);
             byte[] input = new byte[64];
@@ -113,7 +130,11 @@ public class AES {
             return null;
         }
         Cipher cipher = Cipher.getInstance("AES" + paddingMode);
-        cipher.init(Cipher.DECRYPT_MODE, key);
+        if (paddingMode.contains("ECB")) {
+            cipher.init(Cipher.DECRYPT_MODE, key);
+        } else {
+            cipher.init(Cipher.DECRYPT_MODE, key, new IvParameterSpec(new byte[16]));
+        }
 
         byte[] plainText = cipher.doFinal(text);
         String output = new String(plainText, "UTF-8");
@@ -125,7 +146,11 @@ public class AES {
             return null;
         }
         Cipher cipher = Cipher.getInstance("AES" + paddingMode);
-        cipher.init(Cipher.DECRYPT_MODE, key);
+        if (paddingMode.contains("ECB")) {
+            cipher.init(Cipher.DECRYPT_MODE, key);
+        } else {
+            cipher.init(Cipher.DECRYPT_MODE, key, new IvParameterSpec(new byte[16]));
+        }
 
         byte[] p = Base64.getDecoder().decode(text.getBytes());
         return new String(cipher.doFinal(p), "UTF-8");

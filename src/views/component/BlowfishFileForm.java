@@ -236,7 +236,7 @@ public class BlowfishFileForm extends javax.swing.JPanel {
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel2.setText("Key size :");
 
-        jCBSizeKey.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "56", "" }));
+        jCBSizeKey.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "128" }));
         jCBSizeKey.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCBSizeKeyActionPerformed(evt);
