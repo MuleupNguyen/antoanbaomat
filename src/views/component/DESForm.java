@@ -75,7 +75,7 @@ public class DESForm extends javax.swing.JPanel {
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel2.setText("Key size :");
 
-        jCBSizeKey.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "56", " " }));
+        jCBSizeKey.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "56" }));
         jCBSizeKey.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCBSizeKeyActionPerformed(evt);
@@ -467,27 +467,35 @@ public class DESForm extends javax.swing.JPanel {
         if (key.isBlank()) {
             JOptionPane.showMessageDialog(this, "Vui lòng nhập key.", "Lỗi", JOptionPane.ERROR_MESSAGE);
         } else {
-            DES des = new DES();
-            String input = jTAInput.getText();
-            des.setKey(key);
+            int sizeKey = Integer.parseInt(jCBSizeKey.getSelectedItem().toString());
+//            byte[] bytes = key.getBytes();
+//            int bitCount = bytes.length * 8;
+//            if (sizeKey != bitCount) {
+//                System.out.println(bitCount);
+//                System.out.println(sizeKey);
+//            } else {
+                DES des = new DES(sizeKey);
+                String input = jTAInput.getText();
+                des.setKey(key);
 
-            String cbMode = jCBMode.getSelectedItem().toString();
-            String cbPadding = jCBPadding.getSelectedItem().toString();
+                String cbMode = jCBMode.getSelectedItem().toString();
+                String cbPadding = jCBPadding.getSelectedItem().toString();
 
-            des.setPaddingMode(cbPadding, cbMode);
-            try {
-                jTAOutput.setText(des.encryptBase64(input));
-            } catch (Exception ex) {
-//                Logger.getLogger(DESForm.class.getName()).log(Level.SEVERE, null, ex);
-                JOptionPane.showMessageDialog(this, "Mode hoặc padding không đúng.", "Lỗi", JOptionPane.ERROR_MESSAGE);
-            }
+                des.setPaddingMode(cbPadding, cbMode);
+                try {
+                    jTAOutput.setText(des.encryptBase64(input));
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(this, "Mode hoặc padding không đúng.", "Lỗi", JOptionPane.ERROR_MESSAGE);
+                }
+//            }
+
         }
 
     }//GEN-LAST:event_jButtonEncryptActionPerformed
 
     private void jButtonCreateKeyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCreateKeyActionPerformed
         int keySize = Integer.parseInt(jCBSizeKey.getSelectedItem().toString());
-        DES des = new DES();
+        DES des = new DES(keySize);
         try {
             des.createKey();
         } catch (NoSuchAlgorithmException ex) {
@@ -501,22 +509,29 @@ public class DESForm extends javax.swing.JPanel {
         if (key.isBlank()) {
             JOptionPane.showMessageDialog(this, "Vui lòng nhập key.", "Lỗi", JOptionPane.ERROR_MESSAGE);
         } else {
+            int sizeKey = Integer.parseInt(jCBSizeKey.getSelectedItem().toString());
+//            byte[] bytes = key.getBytes();
+//            int bitCount = bytes.length * 8;
+//            if (sizeKey != bitCount) {
+//                System.out.println(bitCount);
+//                System.out.println(sizeKey);
+//            } else {
+                DES des = new DES(sizeKey);
 
-            DES des = new DES();
+                String input = jTAInput.getText();
+                des.setKey(key);
 
-            String input = jTAInput.getText();
-            des.setKey(key);
+                String cbMode = jCBMode.getSelectedItem().toString();
+                String cbPadding = jCBPadding.getSelectedItem().toString();
 
-            String cbMode = jCBMode.getSelectedItem().toString();
-            String cbPadding = jCBPadding.getSelectedItem().toString();
+                des.setPaddingMode(cbPadding, cbMode);
+                try {
+                    jTAOutput.setText(des.decryptBase64(input));
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(this, "Mode hoặc padding không đúng.", "Lỗi", JOptionPane.ERROR_MESSAGE);
+                }
+//            }
 
-            des.setPaddingMode(cbPadding, cbMode);
-            try {
-                jTAOutput.setText(des.decryptBase64(input));
-            } catch (Exception ex) {
-//              Logger.getLogger(DESForm.class.getName()).log(Level.SEVERE, null, ex);
-                JOptionPane.showMessageDialog(this, "Mode hoặc padding không đúng.", "Lỗi", JOptionPane.ERROR_MESSAGE);
-            }
         }
     }//GEN-LAST:event_jButtonDecryptActionPerformed
 

@@ -29,7 +29,7 @@ public class Menu extends JComponent {
     private String[][] menuItems = new String[][]{
         {"Mã hóa đối xứng", "Vigenere","Vigenere File", "Hill", "Hill File", "DES", "DES File", "AES", 
             "AES File", "Blowfish", "Blowfish File", "Twofish", "Twofish File"},
-        {"Mã hóa bất đối xứng"},
+        {"Mã hóa bất đối xứng", "RSA", "RSA File"},
         {"Hash", "MD5", "MD5 File"},
         {"Chữ ký điện tử"},
     };

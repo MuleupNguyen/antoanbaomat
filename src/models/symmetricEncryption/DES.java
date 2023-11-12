@@ -21,10 +21,14 @@ public class DES {
     public void setPaddingMode(String padding, String mode) {
         this.paddingMode = "/" + mode + "/" + padding + "Padding";
     }
+    
+    public DES(int keySize) {
+        this.keySize = keySize;
+    }
 
     public SecretKey createKey() throws NoSuchAlgorithmException {
         KeyGenerator keyGenerator = KeyGenerator.getInstance("DES");
-        keyGenerator.init(56);
+        keyGenerator.init(keySize);
         key = keyGenerator.generateKey();
         return key;
     }
