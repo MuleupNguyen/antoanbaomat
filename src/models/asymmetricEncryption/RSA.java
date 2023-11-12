@@ -28,6 +28,14 @@ public class RSA {
 
     }
 
+    public PrivateKey getPrivateKey() {
+        return this.privateKey;
+    }
+
+    public PublicKey getPublicKey() {
+        return this.publicKey;
+    }
+
     public String getPublicKeyAsString() {
         // Lấy publicKey từ đối tượng RSA của bạn
         PublicKey publicKey = this.publicKey;
@@ -55,6 +63,29 @@ public class RSA {
     }
 
     // Hàm để thiết lập PublicKey từ chuỗi
+    public void setPublicKey(String publicKeyString) throws Exception {
+        byte[] publicKeyBytes = Base64.getDecoder().decode(publicKeyString);
+
+        KeyFactory keyFactory = KeyFactory.getInstance("RSA");
+
+        // Chuyển khóa công khai
+        X509EncodedKeySpec publicKeySpec = new X509EncodedKeySpec(publicKeyBytes);
+        PublicKey publicK = keyFactory.generatePublic(publicKeySpec);
+        this.publicKey = publicK;
+    }
+
+    // Hàm để thiết lập PrivateKey từ chuỗi
+    public void setPrivateKey(String privateKeyString) throws Exception {
+        byte[] privateKeyBytes = Base64.getDecoder().decode(privateKeyString);
+
+        KeyFactory keyFactory = KeyFactory.getInstance("RSA");
+
+        // Chuyển khóa riêng tư
+        PKCS8EncodedKeySpec privateKeySpec = new PKCS8EncodedKeySpec(privateKeyBytes);
+        PrivateKey privateK = keyFactory.generatePrivate(privateKeySpec);
+        this.privateKey = privateK;
+    }
+
     public void setKey(String publicKeyString, String privateKeyString) throws Exception {
         byte[] publicKeyBytes = Base64.getDecoder().decode(publicKeyString);
         byte[] privateKeyBytes = Base64.getDecoder().decode(privateKeyString);
@@ -135,17 +166,5 @@ public class RSA {
         bof.close();
     }
 
-    public static void main(String[] args) throws Exception {
-        RSA rsa = new RSA();
-//        rsa.genKey();
-        String publicKey = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA6AV/TxgMJj/vp+EERR2zTR2K6aqP2ZgPyUaw0eT3IR0/jqRWPW+KlAKtJCvQCNStuqVeKdrfv9utk+nJUxedoxImEFq11tIQwnYQZtzZYuoFYCTCbBnLKSQbaE35sC2s+4mJG67kbvwPVvo8d3e3tEnnquNr2dQA0WV8GTdLcXjukMPqLESwLb5udY2V2MLIypXWq0Fi8PqUkkTboR1FdXewH0tneQme/tG9PPjuAZ07IjaWixzPNfEXkcsiwUa9W4Q5uwH7OAYrqXH3HHpQQRO+uXjQPYOyR85Ogf9kTt3uqPWnNEY9awI0/zTZCw3kIxm+lzhaLzApuNED6rnIIQIDAQAB";
-        String privateKey = "MIIEvwIBADANBgkqhkiG9w0BAQEFAASCBKkwggSlAgEAAoIBAQDoBX9PGAwmP++n4QRFHbNNHYrpqo/ZmA/JRrDR5PchHT+OpFY9b4qUAq0kK9AI1K26pV4p2t+/262T6clTF52jEiYQWrXW0hDCdhBm3Nli6gVgJMJsGcspJBtoTfmwLaz7iYkbruRu/A9W+jx3d7e0Seeq42vZ1ADRZXwZN0txeO6Qw+osRLAtvm51jZXYwsjKldarQWLw+pSSRNuhHUV1d7AfS2d5CZ7+0b08+O4BnTsiNpaLHM818ReRyyLBRr1bhDm7Afs4BiupcfccelBBE765eNA9g7JHzk6B/2RO3e6o9ac0Rj1rAjT/NNkLDeQjGb6XOFovMCm40QPqucghAgMBAAECggEAbLDuk7HTNzPqY/2gT3R7Y1u8kHwLSUbX1lVcTedx8bxO4taPY9ZV18JtM62mlgxzmiUPuJHFEY6qgMkbO+arPRIqbKzh1FGx8jb2tgkteQ3iGMj/nz5yEsLMaA9nMaYkC+3BIgvLDUbdNMSjAOA/WaDpev9wramH/JALE5D4sZ2ttqMET++HcuxAzDtY3IR4qDJOvohmc1GgDq3qHZgGTVRdPzs10ctXNFJ0uZosPNUlyFlIH6Bo6l0fYI4m5SKzdot/uifzqQYzM3arPxBQDG88jndKMvAuf3eWcL+oDt2SM7Aeg9cVrNog1YaSYaHDQGa3YUOajVUMRAdasr01hQKBgQD9mMwLZ4avHhqmxdn3tfwXnxq4J6cg1OYdvgJEKleQkH/26gwbXCMuN4OAQIndYldhUS4P+bk70r/JH40BiHUDTfv/mJox7pZaWI/VHg+sT+mXW2z7+129zxbz5DAbHPODsePPDgogsacwhHOSsL1aQyWxpgjhIEnRG/1OINg3awKBgQDqOFw9s9/wR8CAB5aOq0hlVYP7xvnzbhae5sFQO3nitiIWJvWo4OlmlVgeczVJ8wE4Td5Jig4ToIN3vbwnakDQw82zfMFxeXNzi0mGLtmmWHwJr1B9theAL5ZCX6dfBVMU/jz2AoQcW5DaeRvhsnnsaM4NyvZBdSqXedEcXA49owKBgQDCT9nIw0KH2+E/+EnTbDYFQ3wNrxR4K6lHENhbsrX1p0LlxuAP9sFeIFs6YjlA0KFzh+hrhUVReWJKkUpR6mT+azqz1hIQQGgkQcez3JzVw0WRHBSd3zUswwkrR6U0oTJVrnCHrpJECtu4aUTFGXd9OgYf4MDc/wiQmYm126TQkQKBgQDhXE1UiUhFV6SfC64PpDrKVdfiX/eMBDb7uafzXObP/tMZYW8piQ7KR5Q76Doz5v8bf8EMHSuiMuWMRyFNA21N8bhwpO80EdnGKRUbaOS+q5DdeLQH4TcHfcIkJwlR4juojV92jcEzz962d6UeKq4pjEYG+2yqWuQaT3mmweRp5QKBgQC/bxeht1L9A6nuItHffpMxkYQoGQbP+1wBCqio69CfkbrPffkM1d87VHkbQ95Aefs3Vv5VE8Yquuf6ixztL1WRT9qCK2gIoIVcfy14hpXA7L/HKxKhNXR+mUyCb9awpVAF+WwukEutQQ6H29PL+EZ1F2bo4TIGVOt8qEquGlSVcQ==";
-        rsa.setKey(publicKey, privateKey);
-        System.out.println(rsa.getPublicKeyAsString());
-        System.out.println(rsa.getPrivateKeyAsString());
-        String planText = rsa.encrypt("Below is the tool for encryption and decryption");
-        System.out.println(planText);
-        System.out.println(rsa.decrypt(planText));
-        System.out.println();
-    }
+
 }

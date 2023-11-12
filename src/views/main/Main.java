@@ -11,11 +11,14 @@ import views.component.BlowfishFileForm;
 import views.component.BlowfishForm;
 import views.component.DESFileForm;
 import views.component.DESForm;
+import views.component.DigitalSignatureForm;
 import views.component.HillForm;
 import views.component.MD5FileForm;
 import views.component.MD5Form;
 import views.component.RSAFileForm;
 import views.component.RSAForm;
+import views.component.SHA1FileForm;
+import views.component.SHA1Form;
 import views.component.TwofishForm;
 import views.component.VigenereFileForm;
 import views.component.VigenereForm;
@@ -66,6 +69,12 @@ public class Main extends javax.swing.JFrame {
                     showForm(new MD5Form());
                 } else if (index == 2 && subIndex == 2) {
                     showForm(new MD5FileForm());
+                }else if (index == 2 && subIndex == 3) {
+                    showForm(new SHA1Form());
+                } else if (index == 2 && subIndex == 4) {
+                    showForm(new SHA1FileForm());
+                }else if (index == 3) {
+                    showForm(new DigitalSignatureForm());
                 }
             }
         });

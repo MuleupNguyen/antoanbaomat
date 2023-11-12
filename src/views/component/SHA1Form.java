@@ -1,21 +1,17 @@
+
 package views.component;
 
 import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
-import java.io.File;
-import javax.swing.JFileChooser;
-import javax.swing.JOptionPane;
-import models.FileModel;
-import models.hashs.MD5;
+import models.hashs.SHA1;
+public class SHA1Form extends javax.swing.JPanel {
 
-public class MD5FileForm extends javax.swing.JPanel {
 
-    private String sourceFile;
-
-    public MD5FileForm() {
+    public SHA1Form() {
         initComponents();
     }
+
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -24,11 +20,12 @@ public class MD5FileForm extends javax.swing.JPanel {
         jPanel4 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTAInput = new javax.swing.JTextArea();
         jPanel7 = new javax.swing.JPanel();
         jButtonEncrypt = new javax.swing.JButton();
         jBClearInput = new javax.swing.JButton();
         jBClearOutput = new javax.swing.JButton();
-        jBFileInput = new javax.swing.JButton();
         jPanel6 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
@@ -44,6 +41,14 @@ public class MD5FileForm extends javax.swing.JPanel {
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel4.setText("Input:");
+
+        jTAInput.setBackground(new java.awt.Color(242, 242, 242));
+        jTAInput.setColumns(20);
+        jTAInput.setLineWrap(true);
+        jTAInput.setRows(5);
+        jTAInput.setWrapStyleWord(true);
+        jTAInput.setBorder(null);
+        jScrollPane2.setViewportView(jTAInput);
 
         jPanel7.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -101,14 +106,6 @@ public class MD5FileForm extends javax.swing.JPanel {
                 .addComponent(jBClearOutput, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        jBFileInput.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jBFileInput.setText("DROP FILE HERE");
-        jBFileInput.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBFileInputActionPerformed(evt);
-            }
-        });
-
         jPanel6.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -151,7 +148,7 @@ public class MD5FileForm extends javax.swing.JPanel {
                     .addComponent(jBCopy, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(0, 0, 0)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
@@ -163,12 +160,12 @@ public class MD5FileForm extends javax.swing.JPanel {
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel4)
                     .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addComponent(jBFileInput, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(12, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -178,9 +175,9 @@ public class MD5FileForm extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jBFileInput, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(26, Short.MAX_VALUE))
-            .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jPanel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
@@ -201,63 +198,51 @@ public class MD5FileForm extends javax.swing.JPanel {
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("HASH FILE  MD5");
+        jLabel1.setText("HASH SHA-1");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(53, 53, 53)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(174, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(53, 53, 53)
+                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(42, 42, 42)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(168, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(10, 10, 10)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(61, 61, 61))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonEncryptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEncryptActionPerformed
-        MD5 md5 = new MD5();
-        if (sourceFile == null) {
-            JOptionPane.showMessageDialog(this, "Vui lòng chọn file.", "Lỗi", JOptionPane.ERROR_MESSAGE);
+        SHA1 sha1 = new SHA1();
+        String input = jTAInput.getText().trim();
+        if(input.isBlank()) {
+
         }else {
-            String output = md5.checkFile(sourceFile);
+            String output = sha1.check(input);
             jTAOutput.setText(output);
         }
     }//GEN-LAST:event_jButtonEncryptActionPerformed
 
     private void jBClearInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBClearInputActionPerformed
-        sourceFile = null;
-        jBFileInput.setText("DROP FILE HERE");
+        jTAInput.setText("");
     }//GEN-LAST:event_jBClearInputActionPerformed
 
     private void jBClearOutputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBClearOutputActionPerformed
         jTAOutput.setText("");
     }//GEN-LAST:event_jBClearOutputActionPerformed
-
-    private void jBFileInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBFileInputActionPerformed
-        JFileChooser fileChooser = new JFileChooser();
-
-        int returnValue = fileChooser.showOpenDialog(this);
-
-        // Kiểm tra nếu người dùng đã chọn một tệp
-        if (returnValue == JFileChooser.APPROVE_OPTION) {
-            File selectedFile = fileChooser.getSelectedFile();
-            sourceFile = selectedFile.getAbsolutePath();
-            FileModel fileModel = new FileModel();
-            String nameFileCipher = fileModel.addCipherSuffix(selectedFile.getName());
-            jBFileInput.setText(selectedFile.getName());
-        }
-    }//GEN-LAST:event_jBFileInputActionPerformed
 
     private void jBCopyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCopyActionPerformed
         String textToCopy = jTAOutput.getText();
@@ -276,7 +261,6 @@ public class MD5FileForm extends javax.swing.JPanel {
     private javax.swing.JButton jBClearInput;
     private javax.swing.JButton jBClearOutput;
     private javax.swing.JButton jBCopy;
-    private javax.swing.JButton jBFileInput;
     private javax.swing.JButton jButtonEncrypt;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel4;
@@ -285,7 +269,9 @@ public class MD5FileForm extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JTextArea jTAInput;
     private javax.swing.JTextArea jTAOutput;
     // End of variables declaration//GEN-END:variables
 }

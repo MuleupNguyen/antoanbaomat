@@ -7,13 +7,13 @@ import java.io.File;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import models.FileModel;
-import models.hashs.MD5;
+import models.hashs.SHA1;   
 
-public class MD5FileForm extends javax.swing.JPanel {
+public class SHA1FileForm extends javax.swing.JPanel {
 
     private String sourceFile;
 
-    public MD5FileForm() {
+    public SHA1FileForm() {
         initComponents();
     }
 
@@ -201,7 +201,7 @@ public class MD5FileForm extends javax.swing.JPanel {
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("HASH FILE  MD5");
+        jLabel1.setText("HASH FILE  SHA-1");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -225,24 +225,17 @@ public class MD5FileForm extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButtonEncryptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEncryptActionPerformed
-        MD5 md5 = new MD5();
-        if (sourceFile == null) {
-            JOptionPane.showMessageDialog(this, "Vui lòng chọn file.", "Lỗi", JOptionPane.ERROR_MESSAGE);
-        }else {
-            String output = md5.checkFile(sourceFile);
-            jTAOutput.setText(output);
+    private void jBCopyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCopyActionPerformed
+        String textToCopy = jTAOutput.getText();
+        if (!textToCopy.isEmpty()) {
+            // Lấy Clipboard hệ thống
+            Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+
+            // Đặt dữ liệu vào Clipboard
+            StringSelection stringSelection = new StringSelection(textToCopy);
+            clipboard.setContents(stringSelection, null);
         }
-    }//GEN-LAST:event_jButtonEncryptActionPerformed
-
-    private void jBClearInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBClearInputActionPerformed
-        sourceFile = null;
-        jBFileInput.setText("DROP FILE HERE");
-    }//GEN-LAST:event_jBClearInputActionPerformed
-
-    private void jBClearOutputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBClearOutputActionPerformed
-        jTAOutput.setText("");
-    }//GEN-LAST:event_jBClearOutputActionPerformed
+    }//GEN-LAST:event_jBCopyActionPerformed
 
     private void jBFileInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBFileInputActionPerformed
         JFileChooser fileChooser = new JFileChooser();
@@ -259,17 +252,24 @@ public class MD5FileForm extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_jBFileInputActionPerformed
 
-    private void jBCopyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCopyActionPerformed
-        String textToCopy = jTAOutput.getText();
-        if (!textToCopy.isEmpty()) {
-            // Lấy Clipboard hệ thống
-            Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+    private void jBClearOutputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBClearOutputActionPerformed
+        jTAOutput.setText("");
+    }//GEN-LAST:event_jBClearOutputActionPerformed
 
-            // Đặt dữ liệu vào Clipboard
-            StringSelection stringSelection = new StringSelection(textToCopy);
-            clipboard.setContents(stringSelection, null);
+    private void jBClearInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBClearInputActionPerformed
+        sourceFile = null;
+        jBFileInput.setText("DROP FILE HERE");
+    }//GEN-LAST:event_jBClearInputActionPerformed
+
+    private void jButtonEncryptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEncryptActionPerformed
+        SHA1 sha1 = new SHA1();
+        if (sourceFile == null) {
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn file.", "Lỗi", JOptionPane.ERROR_MESSAGE);
+        }else {
+            String output = sha1.checkFile(sourceFile);
+            jTAOutput.setText(output);
         }
-    }//GEN-LAST:event_jBCopyActionPerformed
+    }//GEN-LAST:event_jButtonEncryptActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
