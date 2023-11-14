@@ -1,16 +1,7 @@
 package utils;
 
 public class Alphabet {
-    public static char[] matrixEnglish = {
-            'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r',
-            's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
-            'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R',
-            'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
-            '!', '"', '#', '$', '%', '&', '\'', '(', ')', '*', '+', ',', '-', '.', '/',
-            '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', ':', ';', '<', '=', '>', '?',
-            '@', '[', '\\', ']', '^', '_', '`',
-             '{', '|', '}', '~', ' '
-    };
+
     public static char[] matrixEnglish2 = {
             'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r',
             's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
@@ -29,15 +20,9 @@ public class Alphabet {
             'Ố', 'Ồ', 'Ổ', 'Ỗ', 'Ộ', 'Ơ', 'Ớ', 'Ờ', 'Ở', 'Ỡ', 'Ợ', 'P', 'Q', 'R', 'S', 'T', 'U', 'Ú',
             'Ù', 'Ủ', 'Ụ', 'Ũ', 'Ư', 'Ứ', 'Ừ', 'Ử', 'Ữ', 'Ự', 'V', 'X', 'Y', 'Ý', 'Ỳ', 'Ỷ', 'Ỵ', 'Ỹ'};
 
-    public static int sizeEnglish = matrixEnglish.length;
+
     public static int sizeEnglish2 = matrixEnglish2.length;
     public static int sizeVN2 = matrixVN2.length;
-    public static int indexInEnglish(char s) {
-        for (int i = 0; i < sizeEnglish; i++) {
-            if (s == matrixEnglish[i]) return i;
-        }
-        return -1;
-    }
 
     public static int indexInEnglish2(char s) {
         for (int i = 0; i < sizeEnglish2; i++) {
@@ -53,9 +38,6 @@ public class Alphabet {
         return -1;
     }
 
-    public static String valueInEnglish(int index) {
-        return String.valueOf(matrixEnglish[index]);
-    }
     public static String valueInEnglish2(int index) {
         return String.valueOf(matrixEnglish2[index]);
     }
@@ -92,8 +74,7 @@ public class Alphabet {
     }
 
     public static void main(String[] args) {
-        System.out.println(Alphabet.indexInEnglish('z'));
-        System.out.println(Alphabet.valueInEnglish(3));
+
 
 
 

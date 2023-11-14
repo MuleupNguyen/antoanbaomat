@@ -13,6 +13,7 @@ import javax.swing.SwingUtilities;
 import models.FileModel;
 import models.KeyModel;
 import models.symmetricEncryption.DES;
+import utils.Keys;
 import views.dialogs.DialogAddKey;
 import views.dialogs.DialogShowKey;
 
@@ -499,11 +500,7 @@ public class DESFileForm extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(this, "Vui lòng chọn file.", "Lỗi", JOptionPane.ERROR_MESSAGE);
             } else {
                 int sizeKey = Integer.parseInt(jCBSizeKey.getSelectedItem().toString());
-                byte[] bytes = key.getBytes();
-                int bitCount = bytes.length * 8;
-                if (sizeKey != bitCount) {
-                    System.out.println(bitCount);
-                } else {
+                if (Keys.checkKey(key, 12)) {
                     DES des = new DES(sizeKey);
                     des.setKey(key);
 
@@ -521,6 +518,8 @@ public class DESFileForm extends javax.swing.JPanel {
                     } catch (Exception ex) {
                         Logger.getLogger(DESFileForm.class.getName()).log(Level.SEVERE, null, ex);
                     }
+                } else {
+                     JOptionPane.showMessageDialog(this, "Key không hợp lệ, độ dài key phải là 12 kí tự cuối cùng là '='.", "Lỗi", JOptionPane.ERROR_MESSAGE);
                 }
 
             }
@@ -534,11 +533,7 @@ public class DESFileForm extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Vui lòng nhập key.", "Lỗi", JOptionPane.ERROR_MESSAGE);
         } else {
             int sizeKey = Integer.parseInt(jCBSizeKey.getSelectedItem().toString());
-            byte[] bytes = key.getBytes();
-            int bitCount = bytes.length * 8;
-            if (sizeKey != bitCount) {
-                System.out.println(bitCount);
-            } else {
+            if (Keys.checkKey(key, 12)) {
                 DES des = new DES(sizeKey);
                 des.setKey(key);
                 String cbMode = jCBMode.getSelectedItem().toString();
@@ -561,6 +556,8 @@ public class DESFileForm extends javax.swing.JPanel {
                 } catch (Exception ex) {
                     Logger.getLogger(DESFileForm.class.getName()).log(Level.SEVERE, null, ex);
                 }
+            } else {
+                 JOptionPane.showMessageDialog(this, "Key không hợp lệ, độ dài key phải là 12 kí tự cuối cùng là '='.", "Lỗi", JOptionPane.ERROR_MESSAGE);
             }
 
         }

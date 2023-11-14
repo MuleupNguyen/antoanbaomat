@@ -21,7 +21,7 @@ public class DES {
     public void setPaddingMode(String padding, String mode) {
         this.paddingMode = "/" + mode + "/" + padding + "Padding";
     }
-    
+
     public DES(int keySize) {
         this.keySize = keySize;
     }
@@ -39,7 +39,6 @@ public class DES {
             key = new SecretKeySpec(keyBytes, "DES");
         } catch (IllegalArgumentException e) {
             key = null;
-            System.out.println("Khóa không hợp lệ.");
         }
     }
 
@@ -48,8 +47,11 @@ public class DES {
             return new byte[]{};
         }
         Cipher cipher = Cipher.getInstance("DES" + paddingMode);
-        if(paddingMode.contains("ECB")) cipher.init(Cipher.ENCRYPT_MODE, key);
-        else cipher.init(Cipher.ENCRYPT_MODE, key, new IvParameterSpec(new byte[8]));
+        if (paddingMode.contains("ECB")) {
+            cipher.init(Cipher.ENCRYPT_MODE, key);
+        } else {
+            cipher.init(Cipher.ENCRYPT_MODE, key, new IvParameterSpec(new byte[8]));
+        }
         byte[] plainText = text.getBytes("UTF-8");
         byte[] cipherText = cipher.doFinal(plainText);
         return cipherText;
@@ -61,12 +63,31 @@ public class DES {
             return "";
         }
         Cipher cipher = Cipher.getInstance("DES" + paddingMode);
-        if(paddingMode.contains("ECB")) cipher.init(Cipher.ENCRYPT_MODE, key);
-        else cipher.init(Cipher.ENCRYPT_MODE, key, new IvParameterSpec(new byte[8]));
-        
+        if (paddingMode.contains("ECB")) {
+            cipher.init(Cipher.ENCRYPT_MODE, key);
+        } else {
+            cipher.init(Cipher.ENCRYPT_MODE, key, new IvParameterSpec(new byte[8]));
+        }
+
         byte[] plainText = text.getBytes("UTF-8");
         byte[] cipherText = cipher.doFinal(plainText);
         return Base64.getEncoder().encodeToString(cipherText);
+    }
+
+    public String decryptBase64(String text) throws Exception {
+        System.out.println("decrypt: " + paddingMode);
+        if (key == null) {
+            return null;
+        }
+        Cipher cipher = Cipher.getInstance("DES" + paddingMode);
+        if (paddingMode.contains("ECB")) {
+            cipher.init(Cipher.DECRYPT_MODE, key);
+        } else {
+            cipher.init(Cipher.DECRYPT_MODE, key, new IvParameterSpec(new byte[8]));
+        }
+
+        byte[] p = Base64.getDecoder().decode(text.getBytes());
+        return new String(cipher.doFinal(p), "UTF-8");
     }
 
     public void encryptFile(String sourceFile, String desFile) throws Exception {
@@ -77,8 +98,11 @@ public class DES {
         File file = new File(sourceFile);
         if (file.isFile()) {
             Cipher cipher = Cipher.getInstance("DES" + paddingMode);
-        if(paddingMode.contains("ECB")) cipher.init(Cipher.ENCRYPT_MODE, key);
-        else cipher.init(Cipher.ENCRYPT_MODE, key, new IvParameterSpec(new byte[8]));
+            if (paddingMode.contains("ECB")) {
+                cipher.init(Cipher.ENCRYPT_MODE, key);
+            } else {
+                cipher.init(Cipher.ENCRYPT_MODE, key, new IvParameterSpec(new byte[8]));
+            }
             FileInputStream fis = new FileInputStream(file);
             FileOutputStream fos = new FileOutputStream(desFile);
             byte[] input = new byte[64];
@@ -102,8 +126,11 @@ public class DES {
         File file = new File(sourceFile);
         if (file.isFile()) {
             Cipher cipher = Cipher.getInstance("DES" + paddingMode);
-        if(paddingMode.contains("ECB")) cipher.init(Cipher.DECRYPT_MODE, key);
-        else cipher.init(Cipher.DECRYPT_MODE, key, new IvParameterSpec(new byte[8]));
+            if (paddingMode.contains("ECB")) {
+                cipher.init(Cipher.DECRYPT_MODE, key);
+            } else {
+                cipher.init(Cipher.DECRYPT_MODE, key, new IvParameterSpec(new byte[8]));
+            }
             FileInputStream fis = new FileInputStream(file);
             FileOutputStream fos = new FileOutputStream(desFile);
             byte[] input = new byte[64];
@@ -126,25 +153,15 @@ public class DES {
             return null;
         }
         Cipher cipher = Cipher.getInstance("DES" + paddingMode);
-        if(paddingMode.contains("ECB")) cipher.init(Cipher.DECRYPT_MODE, key);
-        else cipher.init(Cipher.DECRYPT_MODE, key, new IvParameterSpec(new byte[8]));
+        if (paddingMode.contains("ECB")) {
+            cipher.init(Cipher.DECRYPT_MODE, key);
+        } else {
+            cipher.init(Cipher.DECRYPT_MODE, key, new IvParameterSpec(new byte[8]));
+        }
 
         byte[] plainText = cipher.doFinal(text);
         String output = new String(plainText, "UTF-8");
         return output;
-    }
-
-    public String decryptBase64(String text) throws Exception {
-        System.out.println("decrypt: " + paddingMode);
-        if (key == null) {
-            return null;
-        }
-        Cipher cipher = Cipher.getInstance("DES" + paddingMode);
-        if(paddingMode.contains("ECB")) cipher.init(Cipher.DECRYPT_MODE, key);
-        else cipher.init(Cipher.DECRYPT_MODE, key, new IvParameterSpec(new byte[8]));
-
-        byte[] p = Base64.getDecoder().decode(text.getBytes());
-        return new String(cipher.doFinal(p), "UTF-8");
     }
 
     public String getKey() {

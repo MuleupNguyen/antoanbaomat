@@ -1,5 +1,5 @@
-
 package views.component;
+
 import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
@@ -11,8 +11,10 @@ import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import models.KeyModel;
 import models.symmetricEncryption.Twofish;
+import utils.Keys;
 import views.dialogs.DialogAddKey;
 import views.dialogs.DialogShowKey;
+
 public class TwofishForm extends javax.swing.JPanel {
 
     public TwofishForm() {
@@ -519,20 +521,25 @@ public class TwofishForm extends javax.swing.JPanel {
         if (key.isBlank()) {
             JOptionPane.showMessageDialog(this, "Vui lòng nhập key.", "Lỗi", JOptionPane.ERROR_MESSAGE);
         } else {
-            Twofish twofish = new Twofish();
-            String input = jTAInput.getText();
-            twofish.setKey(key);
+            if (Keys.checkKey(key, 44)) {
+                Twofish twofish = new Twofish();
+                String input = jTAInput.getText();
+                twofish.setKey(key);
 
-            String cbMode = jCBMode.getSelectedItem().toString();
-            String cbPadding = jCBPadding.getSelectedItem().toString();
+                String cbMode = jCBMode.getSelectedItem().toString();
+                String cbPadding = jCBPadding.getSelectedItem().toString();
 
-            twofish.setPaddingMode(cbPadding, cbMode);
-            try {
-                jTAOutput.setText(twofish.encryptBase64(input));
-            } catch (Exception ex) {
-                //                Logger.getLogger(DESForm.class.getName()).log(Level.SEVERE, null, ex);
-                JOptionPane.showMessageDialog(this, "Mode hoặc padding không đúng.", "Lỗi", JOptionPane.ERROR_MESSAGE);
+                twofish.setPaddingMode(cbPadding, cbMode);
+                try {
+                    jTAOutput.setText(twofish.encryptBase64(input));
+                } catch (Exception ex) {
+                    //                Logger.getLogger(DESForm.class.getName()).log(Level.SEVERE, null, ex);
+                    JOptionPane.showMessageDialog(this, "Mode hoặc padding không đúng.", "Lỗi", JOptionPane.ERROR_MESSAGE);
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "Key không hợp lệ, độ dài key phải là 44 kí tự cuối cùng là '='.", "Lỗi", JOptionPane.ERROR_MESSAGE);
             }
+
         }
     }//GEN-LAST:event_jButtonEncryptActionPerformed
 
@@ -541,22 +548,26 @@ public class TwofishForm extends javax.swing.JPanel {
         if (key.isBlank()) {
             JOptionPane.showMessageDialog(this, "Vui lòng nhập key.", "Lỗi", JOptionPane.ERROR_MESSAGE);
         } else {
+            if (Keys.checkKey(key, 44)) {
+                Twofish twofish = new Twofish();
 
-            Twofish twofish = new Twofish();
+                String input = jTAInput.getText();
+                twofish.setKey(key);
 
-            String input = jTAInput.getText();
-            twofish.setKey(key);
+                String cbMode = jCBMode.getSelectedItem().toString();
+                String cbPadding = jCBPadding.getSelectedItem().toString();
 
-            String cbMode = jCBMode.getSelectedItem().toString();
-            String cbPadding = jCBPadding.getSelectedItem().toString();
-
-            twofish.setPaddingMode(cbPadding, cbMode);
-            try {
-                jTAOutput.setText(twofish.decryptBase64(input));
-            } catch (Exception ex) {
-                //              Logger.getLogger(DESForm.class.getName()).log(Level.SEVERE, null, ex);
-                JOptionPane.showMessageDialog(this, "Mode hoặc padding không đúng.", "Lỗi", JOptionPane.ERROR_MESSAGE);
+                twofish.setPaddingMode(cbPadding, cbMode);
+                try {
+                    jTAOutput.setText(twofish.decryptBase64(input));
+                } catch (Exception ex) {
+                    //              Logger.getLogger(DESForm.class.getName()).log(Level.SEVERE, null, ex);
+                    JOptionPane.showMessageDialog(this, "Mode hoặc padding không đúng.", "Lỗi", JOptionPane.ERROR_MESSAGE);
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "Key không hợp lệ, độ dài key phải là 44 kí tự cuối cùng là '='.", "Lỗi", JOptionPane.ERROR_MESSAGE);
             }
+
         }
     }//GEN-LAST:event_jButtonDecryptActionPerformed
 

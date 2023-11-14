@@ -11,6 +11,7 @@ import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import models.KeyModel;
 import models.symmetricEncryption.Blowfish;
+import utils.Keys;
 import views.dialogs.DialogAddKey;
 import views.dialogs.DialogShowKey;
 
@@ -503,20 +504,25 @@ public class BlowfishForm extends javax.swing.JPanel {
         if (key.isBlank()) {
             JOptionPane.showMessageDialog(this, "Vui lòng nhập key.", "Lỗi", JOptionPane.ERROR_MESSAGE);
         } else {
-            Blowfish blowfish = new Blowfish();
-            String input = jTAInput.getText();
-            blowfish.setKey(key);
+            if (Keys.checkKey(key, 24)) {
+                Blowfish blowfish = new Blowfish();
+                String input = jTAInput.getText();
+                blowfish.setKey(key);
 
-            String cbMode = jCBMode.getSelectedItem().toString();
-            String cbPadding = jCBPadding.getSelectedItem().toString();
+                String cbMode = jCBMode.getSelectedItem().toString();
+                String cbPadding = jCBPadding.getSelectedItem().toString();
 
-            blowfish.setPaddingMode(cbPadding, cbMode);
-            try {
-                jTAOutput.setText(blowfish.encryptBase64(input));
-            } catch (Exception ex) {
-                //                Logger.getLogger(DESForm.class.getName()).log(Level.SEVERE, null, ex);
-                JOptionPane.showMessageDialog(this, "Mode hoặc padding không đúng.", "Lỗi", JOptionPane.ERROR_MESSAGE);
+                blowfish.setPaddingMode(cbPadding, cbMode);
+                try {
+                    jTAOutput.setText(blowfish.encryptBase64(input));
+                } catch (Exception ex) {
+                    //                Logger.getLogger(DESForm.class.getName()).log(Level.SEVERE, null, ex);
+                    JOptionPane.showMessageDialog(this, "Mode hoặc padding không đúng.", "Lỗi", JOptionPane.ERROR_MESSAGE);
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "Key không hợp lệ, độ dài key phải là 24 kí tự cuối cùng là '='.", "Lỗi", JOptionPane.ERROR_MESSAGE);
             }
+
         }
     }//GEN-LAST:event_jButtonEncryptActionPerformed
 
@@ -525,22 +531,26 @@ public class BlowfishForm extends javax.swing.JPanel {
         if (key.isBlank()) {
             JOptionPane.showMessageDialog(this, "Vui lòng nhập key.", "Lỗi", JOptionPane.ERROR_MESSAGE);
         } else {
+            if (Keys.checkKey(key, 24)) {
+                Blowfish blowfish = new Blowfish();
 
-            Blowfish blowfish = new Blowfish();
+                String input = jTAInput.getText();
+                blowfish.setKey(key);
 
-            String input = jTAInput.getText();
-            blowfish.setKey(key);
+                String cbMode = jCBMode.getSelectedItem().toString();
+                String cbPadding = jCBPadding.getSelectedItem().toString();
 
-            String cbMode = jCBMode.getSelectedItem().toString();
-            String cbPadding = jCBPadding.getSelectedItem().toString();
-
-            blowfish.setPaddingMode(cbPadding, cbMode);
-            try {
-                jTAOutput.setText(blowfish.decryptBase64(input));
-            } catch (Exception ex) {
-                //              Logger.getLogger(DESForm.class.getName()).log(Level.SEVERE, null, ex);
-                JOptionPane.showMessageDialog(this, "Mode hoặc padding không đúng.", "Lỗi", JOptionPane.ERROR_MESSAGE);
+                blowfish.setPaddingMode(cbPadding, cbMode);
+                try {
+                    jTAOutput.setText(blowfish.decryptBase64(input));
+                } catch (Exception ex) {
+                    //              Logger.getLogger(DESForm.class.getName()).log(Level.SEVERE, null, ex);
+                    JOptionPane.showMessageDialog(this, "Mode hoặc padding không đúng.", "Lỗi", JOptionPane.ERROR_MESSAGE);
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "Key không hợp lệ, độ dài key phải là 24 kí tự cuối cùng là '='.", "Lỗi", JOptionPane.ERROR_MESSAGE);
             }
+
         }
     }//GEN-LAST:event_jButtonDecryptActionPerformed
 

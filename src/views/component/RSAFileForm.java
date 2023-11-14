@@ -273,7 +273,7 @@ public class RSAFileForm extends javax.swing.JPanel {
         jPanel9Layout.setVerticalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel9Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(6, 6, 6)
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel9Layout.createSequentialGroup()
                         .addComponent(jButtonDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -283,7 +283,7 @@ public class RSAFileForm extends javax.swing.JPanel {
                         .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jBCopyPrivateKey2))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addContainerGap())))
         );
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
@@ -514,8 +514,6 @@ public class RSAFileForm extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBClearInput;
     private javax.swing.JButton jBClearOutput;
-    private javax.swing.JButton jBCopyPrivateKey;
-    private javax.swing.JButton jBCopyPrivateKey1;
     private javax.swing.JButton jBCopyPrivateKey2;
     private javax.swing.JButton jBCopyPublicKey;
     private javax.swing.JButton jBFileInput;
@@ -526,25 +524,17 @@ public class RSAFileForm extends javax.swing.JPanel {
     private javax.swing.JButton jButtonEncrypt;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
-    private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
-    private javax.swing.JTextArea jTAPrivateK;
-    private javax.swing.JTextArea jTAPrivateK1;
     private javax.swing.JTextArea jTAPrivateK2;
     private javax.swing.JTextArea jTAPublicK;
     // End of variables declaration//GEN-END:variables

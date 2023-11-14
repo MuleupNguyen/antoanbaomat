@@ -10,7 +10,7 @@ public class KeyModel implements Serializable{
     private int keySize;
     private String mode;
     private String padding;
-
+    
     public KeyModel(String name, String key, int keySize, String mode, String padding) {
         this.name = name;
         this.key = key;

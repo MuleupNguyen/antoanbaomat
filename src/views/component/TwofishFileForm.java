@@ -1,4 +1,3 @@
-
 package views.component;
 
 import java.awt.Desktop;
@@ -14,9 +13,12 @@ import javax.swing.SwingUtilities;
 import models.FileModel;
 import models.KeyModel;
 import models.symmetricEncryption.Twofish;
+import utils.Keys;
 import views.dialogs.DialogAddKey;
 import views.dialogs.DialogShowKey;
+
 public class TwofishFileForm extends javax.swing.JPanel {
+
     private String sourceFile;
     private String desFile;
 
@@ -514,23 +516,28 @@ public class TwofishFileForm extends javax.swing.JPanel {
             if (sourceFile == null || desFile == null) {
                 JOptionPane.showMessageDialog(this, "Vui lòng chọn file.", "Lỗi", JOptionPane.ERROR_MESSAGE);
             } else {
-                Twofish twofish = new Twofish();
-                twofish.setKey(key);
+                if (Keys.checkKey(key, 44)) {
+                    Twofish twofish = new Twofish();
+                    twofish.setKey(key);
 
-                String cbMode = jCBMode.getSelectedItem().toString();
-                String cbPadding = jCBPadding.getSelectedItem().toString();
+                    String cbMode = jCBMode.getSelectedItem().toString();
+                    String cbPadding = jCBPadding.getSelectedItem().toString();
 
-                twofish.setPaddingMode(cbPadding, cbMode);
-                try {
-                    twofish.encryptFile(sourceFile, desFile);
-                    File f = new File(desFile);
-                    if (f.exists()) {
-                        jBFileOutput.setText(f.getName());
-                        jBFileOutput.setEnabled(true);
+                    twofish.setPaddingMode(cbPadding, cbMode);
+                    try {
+                        twofish.encryptFile(sourceFile, desFile);
+                        File f = new File(desFile);
+                        if (f.exists()) {
+                            jBFileOutput.setText(f.getName());
+                            jBFileOutput.setEnabled(true);
+                        }
+                    } catch (Exception ex) {
+                        Logger.getLogger(DESFileForm.class.getName()).log(Level.SEVERE, null, ex);
                     }
-                } catch (Exception ex) {
-                    Logger.getLogger(DESFileForm.class.getName()).log(Level.SEVERE, null, ex);
+                } else {
+                    JOptionPane.showMessageDialog(this, "Key không hợp lệ, độ dài key phải là 44 kí tự cuối cùng là '='.", "Lỗi", JOptionPane.ERROR_MESSAGE);
                 }
+
             }
 
         }
@@ -541,27 +548,32 @@ public class TwofishFileForm extends javax.swing.JPanel {
         if (key.isBlank()) {
             JOptionPane.showMessageDialog(this, "Vui lòng nhập key.", "Lỗi", JOptionPane.ERROR_MESSAGE);
         } else {
-            Twofish twofish = new Twofish();
-            twofish.setKey(key);
-            String cbMode = jCBMode.getSelectedItem().toString();
-            String cbPadding = jCBPadding.getSelectedItem().toString();
+            if (Keys.checkKey(key, 44)) {
+                Twofish twofish = new Twofish();
+                twofish.setKey(key);
+                String cbMode = jCBMode.getSelectedItem().toString();
+                String cbPadding = jCBPadding.getSelectedItem().toString();
 
-            twofish.setPaddingMode(cbPadding, cbMode);
-            try {
-                File fSource = new File(sourceFile);
-                FileModel fileModel = new FileModel();
+                twofish.setPaddingMode(cbPadding, cbMode);
+                try {
+                    File fSource = new File(sourceFile);
+                    FileModel fileModel = new FileModel();
 
-                String fileDecrypt = fSource.getParent() + File.separator + fileModel.addDecryptSuffix(fSource.getName());
-                twofish.decryptFile(sourceFile, fileDecrypt);
-                File f = new File(fileDecrypt);
-                if (f.exists()) {
-                    desFile = fileDecrypt;
-                    jBFileOutput.setText(f.getName());
-                    jBFileOutput.setEnabled(true);
+                    String fileDecrypt = fSource.getParent() + File.separator + fileModel.addDecryptSuffix(fSource.getName());
+                    twofish.decryptFile(sourceFile, fileDecrypt);
+                    File f = new File(fileDecrypt);
+                    if (f.exists()) {
+                        desFile = fileDecrypt;
+                        jBFileOutput.setText(f.getName());
+                        jBFileOutput.setEnabled(true);
+                    }
+                } catch (Exception ex) {
+                    Logger.getLogger(AESFileForm.class.getName()).log(Level.SEVERE, null, ex);
                 }
-            } catch (Exception ex) {
-                Logger.getLogger(AESFileForm.class.getName()).log(Level.SEVERE, null, ex);
+            } else {
+                JOptionPane.showMessageDialog(this, "Key không hợp lệ, độ dài key phải là 44 kí tự cuối cùng là '='.", "Lỗi", JOptionPane.ERROR_MESSAGE);
             }
+
         }
     }//GEN-LAST:event_jButtonDecryptActionPerformed
 

@@ -11,6 +11,7 @@ import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import models.KeyModel;
 import models.symmetricEncryption.AES;
+import utils.Keys;
 import views.dialogs.DialogAddKey;
 import views.dialogs.DialogShowKey;
 
@@ -507,20 +508,24 @@ public class AESForm extends javax.swing.JPanel {
         if (key.isBlank()) {
             JOptionPane.showMessageDialog(this, "Vui lòng nhập key.", "Lỗi", JOptionPane.ERROR_MESSAGE);
         } else {
-            AES aes = new AES();
-            String input = jTAInput.getText();
-            aes.setKey(key);
+            if (Keys.checkKey(key, 44)) {
+                AES aes = new AES();
+                String input = jTAInput.getText();
+                aes.setKey(key);
 
-            String cbMode = jCBMode.getSelectedItem().toString();
-            String cbPadding = jCBPadding.getSelectedItem().toString();
+                String cbMode = jCBMode.getSelectedItem().toString();
+                String cbPadding = jCBPadding.getSelectedItem().toString();
 
-            aes.setPaddingMode(cbPadding, cbMode);
-            try {
-                jTAOutput.setText(aes.encryptBase64(input));
-            } catch (Exception ex) {
-                //                Logger.getLogger(DESForm.class.getName()).log(Level.SEVERE, null, ex);
-                JOptionPane.showMessageDialog(this, "Mode hoặc padding không đúng.", "Lỗi", JOptionPane.ERROR_MESSAGE);
+                aes.setPaddingMode(cbPadding, cbMode);
+                try {
+                    jTAOutput.setText(aes.encryptBase64(input));
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(this, "Mode hoặc padding không đúng.", "Lỗi", JOptionPane.ERROR_MESSAGE);
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "Key không hợp lệ, độ dài key phải là 44 kí tự cuối cùng là '='.", "Lỗi", JOptionPane.ERROR_MESSAGE);
             }
+
         }
     }//GEN-LAST:event_jButtonEncryptActionPerformed
 
@@ -529,22 +534,26 @@ public class AESForm extends javax.swing.JPanel {
         if (key.isBlank()) {
             JOptionPane.showMessageDialog(this, "Vui lòng nhập key.", "Lỗi", JOptionPane.ERROR_MESSAGE);
         } else {
+            if (Keys.checkKey(key, 44)) {
+                AES aes = new AES();
 
-            AES aes = new AES();
+                String input = jTAInput.getText();
+                aes.setKey(key);
 
-            String input = jTAInput.getText();
-            aes.setKey(key);
+                String cbMode = jCBMode.getSelectedItem().toString();
+                String cbPadding = jCBPadding.getSelectedItem().toString();
 
-            String cbMode = jCBMode.getSelectedItem().toString();
-            String cbPadding = jCBPadding.getSelectedItem().toString();
-
-            aes.setPaddingMode(cbPadding, cbMode);
-            try {
-                jTAOutput.setText(aes.decryptBase64(input));
-            } catch (Exception ex) {
-                //              Logger.getLogger(DESForm.class.getName()).log(Level.SEVERE, null, ex);
-                JOptionPane.showMessageDialog(this, "Mode hoặc padding không đúng.", "Lỗi", JOptionPane.ERROR_MESSAGE);
+                aes.setPaddingMode(cbPadding, cbMode);
+                try {
+                    jTAOutput.setText(aes.decryptBase64(input));
+                } catch (Exception ex) {
+                    //              Logger.getLogger(DESForm.class.getName()).log(Level.SEVERE, null, ex);
+                    JOptionPane.showMessageDialog(this, "Mode hoặc padding không đúng.", "Lỗi", JOptionPane.ERROR_MESSAGE);
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "Key không hợp lệ, độ dài key phải là 44 kí tự cuối cùng là '='.", "Lỗi", JOptionPane.ERROR_MESSAGE);
             }
+
         }
     }//GEN-LAST:event_jButtonDecryptActionPerformed
 

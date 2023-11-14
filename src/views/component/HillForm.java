@@ -236,7 +236,7 @@ public class HillForm extends javax.swing.JPanel {
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel2.setText("Key size :");
+        jLabel2.setText("Key size(byte) :");
 
         jCBSizeKey.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "4" }));
         jCBSizeKey.addActionListener(new java.awt.event.ActionListener() {
@@ -365,7 +365,7 @@ public class HillForm extends javax.swing.JPanel {
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jTFKey, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButtonSave, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jButtonUpKey, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -433,7 +433,8 @@ public class HillForm extends javax.swing.JPanel {
 
     private void jButtonEncryptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEncryptActionPerformed
         String key = jTFKey.getText().trim();
-        Hill hill = new Hill();
+        String language = jCBLang.getSelectedItem().toString();
+        Hill hill = new Hill(language);
         if (key.isBlank()) {
             JOptionPane.showMessageDialog(this, "Vui lòng nhập key.", "Lỗi", JOptionPane.ERROR_MESSAGE);
         } else if (!hill.checkKey(hill.convertStringToMatrix(key))) {
@@ -441,13 +442,8 @@ public class HillForm extends javax.swing.JPanel {
         } else {
             int[][] keyMatrix = hill.convertStringToMatrix(key);
             String input = jTAInput.getText();
-            String language = jCBLang.getSelectedItem().toString();
             try {
-                if (language.equals("English")) {
-                    jTAOutput.setText(hill.encrypt(input, keyMatrix));
-                } else {
-//                    jTAOutput.setText(hill.encryptVN(input, key));
-                }
+                jTAOutput.setText(hill.encrypt(input, keyMatrix));
 
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(this, "Vui lòng đổi sang ngôn ngữ và key phù hợp.", "Lỗi", JOptionPane.ERROR_MESSAGE);
@@ -458,7 +454,8 @@ public class HillForm extends javax.swing.JPanel {
 
     private void jButtonDecryptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDecryptActionPerformed
         String key = jTFKey.getText().trim();
-        Hill hill = new Hill();
+        String language = jCBLang.getSelectedItem().toString();
+        Hill hill = new Hill(language);
         if (key.isBlank()) {
             JOptionPane.showMessageDialog(this, "Vui lòng nhập key.", "Lỗi", JOptionPane.ERROR_MESSAGE);
         } else if (!hill.checkKey(hill.convertStringToMatrix(key))) {
@@ -466,13 +463,9 @@ public class HillForm extends javax.swing.JPanel {
         } else {
             int[][] keyMatrix = hill.convertStringToMatrix(key);
             String input = jTAInput.getText();
-            String language = jCBLang.getSelectedItem().toString();
 
-            if (language.equals("English")) {
-                jTAOutput.setText(hill.decrypt(input, keyMatrix));
-            } else {
-//                jTAOutput.setText(hill.decryptVN(input, key));
-            }
+            jTAOutput.setText(hill.decrypt(input, keyMatrix));
+
         }
     }//GEN-LAST:event_jButtonDecryptActionPerformed
 
@@ -495,12 +488,8 @@ public class HillForm extends javax.swing.JPanel {
     private void jButtonCreateKeyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCreateKeyActionPerformed
         int keySize = Integer.parseInt(jCBSizeKey.getSelectedItem().toString());
         String language = jCBLang.getSelectedItem().toString();
-        Hill hill = new Hill();
-        if (language.equals("English")) {
-            jTFKey.setText(hill.createKey());
-        } else {
-//            jTFKey.setText(hill.createKey());
-        }
+        Hill hill = new Hill(language);
+        jTFKey.setText(hill.createKey());
     }//GEN-LAST:event_jButtonCreateKeyActionPerformed
 
     private void jTFKeyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFKeyActionPerformed
@@ -535,8 +524,8 @@ public class HillForm extends javax.swing.JPanel {
     }//GEN-LAST:event_jButtonUpKeyActionPerformed
 
     private void limitKeyHandler(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_limitKeyHandler
-        if(jTFKey.getText().trim().length() > 3) {
-             evt.consume();
+        if (jTFKey.getText().trim().length() > 3) {
+            evt.consume();
         }
     }//GEN-LAST:event_limitKeyHandler
 
