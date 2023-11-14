@@ -116,6 +116,7 @@ public class MD5FileForm extends javax.swing.JPanel {
 
         jTAOutput.setBackground(new java.awt.Color(242, 242, 242));
         jTAOutput.setColumns(20);
+        jTAOutput.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jTAOutput.setLineWrap(true);
         jTAOutput.setRows(5);
         jTAOutput.setWrapStyleWord(true);

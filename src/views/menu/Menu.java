@@ -30,7 +30,7 @@ public class Menu extends JComponent {
         {"Mã hóa đối xứng", "Vigenere","Vigenere File", "Hill", "Hill File", "DES", "DES File", "AES", 
             "AES File", "Blowfish", "Blowfish File", "Twofish", "Twofish File"},
         {"Mã hóa bất đối xứng", "RSA", "RSA File"},
-        {"Hash", "MD5", "MD5 File", "SHA-1", "SHA-1 File"},
+        {"Hash", "MD5", "MD5 File", "SHA-1", "SHA-1 File", "SHA-256", "SHA-256 File", "SHA-512", "SHA-512 File"},
         {"Chữ ký điện tử"},
     };
 

@@ -44,6 +44,7 @@ public class SHA1Form extends javax.swing.JPanel {
 
         jTAInput.setBackground(new java.awt.Color(242, 242, 242));
         jTAInput.setColumns(20);
+        jTAInput.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jTAInput.setLineWrap(true);
         jTAInput.setRows(5);
         jTAInput.setWrapStyleWord(true);
@@ -113,6 +114,7 @@ public class SHA1Form extends javax.swing.JPanel {
 
         jTAOutput.setBackground(new java.awt.Color(242, 242, 242));
         jTAOutput.setColumns(20);
+        jTAOutput.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jTAOutput.setLineWrap(true);
         jTAOutput.setRows(5);
         jTAOutput.setWrapStyleWord(true);
@@ -212,7 +214,7 @@ public class SHA1Form extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(42, 42, 42)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(168, Short.MAX_VALUE))
+                .addContainerGap(167, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

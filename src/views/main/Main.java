@@ -18,6 +18,10 @@ import views.component.RSAFileForm;
 import views.component.RSAForm;
 import views.component.SHA1FileForm;
 import views.component.SHA1Form;
+import views.component.SHA256FileForm;
+import views.component.SHA256Form;
+import views.component.SHA512FileForm;
+import views.component.SHA512Form;
 import views.component.TwofishForm;
 import views.component.VigenereFileForm;
 import views.component.VigenereForm;
@@ -65,11 +69,19 @@ public class Main extends javax.swing.JFrame {
                     showForm(new MD5Form());
                 } else if (index == 2 && subIndex == 2) {
                     showForm(new MD5FileForm());
-                }else if (index == 2 && subIndex == 3) {
+                } else if (index == 2 && subIndex == 3) {
                     showForm(new SHA1Form());
                 } else if (index == 2 && subIndex == 4) {
                     showForm(new SHA1FileForm());
-                }else if (index == 3) {
+                } else if (index == 2 && subIndex == 5) {
+                    showForm(new SHA256Form());
+                } else if (index == 2 && subIndex == 6) {
+                    showForm(new SHA256FileForm());
+                } else if (index == 2 && subIndex == 7) {
+                    showForm(new SHA512Form());
+                } else if (index == 2 && subIndex == 8) {
+                    showForm(new SHA512FileForm());
+                } else if (index == 3) {
                     showForm(new DigitalSignatureForm());
                 }
             }
