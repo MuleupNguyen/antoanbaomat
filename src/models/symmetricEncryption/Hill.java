@@ -1,14 +1,5 @@
 package models.symmetricEncryption;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
 import utils.Alphabet;
 
 import java.util.*;
@@ -205,78 +196,6 @@ public class Hill {
             a = temp;
         }
         return a;
-    }
-
-    public void encryptFile(String sourceFile, String desFile, String key) throws Exception {
-        if (key == null) {
-            throw new FileNotFoundException("Key not found");
-        }
-
-        int[][] keyMatrix = convertStringToMatrix(key);
-
-        try {
-            BufferedReader reader = new BufferedReader(new FileReader(sourceFile));
-            BufferedWriter writer = new BufferedWriter(new FileWriter(desFile));
-
-            String line;
-            while ((line = reader.readLine()) != null) {
-                // Mã hóa mỗi dòng và ghi kết quả vào file đích
-                String encryptedLine = encrypt(line, keyMatrix);
-                writer.write(encryptedLine);
-                writer.newLine();
-            }
-
-            reader.close();
-            writer.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void decryptFile(String sourceFile, String desFile, String key) throws Exception {
-        if (key == null) {
-            throw new FileNotFoundException("Key not found");
-        }
-
-        int[][] keyMatrix = convertStringToMatrix(key);
-
-        int[][] keyInverse = keyInverse(keyMatrix);
-
-        File file = new File(sourceFile);
-        if (file.isFile()) {
-            FileInputStream fis = new FileInputStream(file);
-            FileOutputStream fos = new FileOutputStream(desFile);
-
-            byte[] input = new byte[64];
-            int bytesRead;
-            int keyIndex = 0;
-            String decryptedContent = "";
-            while ((bytesRead = fis.read(input)) != -1) {
-                String content = new String(input, 0, bytesRead);
-                String test = String.valueOf(bytesRead);
-//                byte[] keyBytes = content.getBytes();
-//                String sBase64 = Base64.getDecoder().decode();
-//                decryptedContent += decrypt(content, keyInverse);
-                decryptedContent += test;
-
-//                
-            }
-
-            fos.write(decryptedContent.getBytes());
-            System.out.println(decryptedContent);
-
-            fos.flush();
-            fos.close();
-            fis.close();
-        }
-    }
-
-    public static void main(String[] args) throws Exception {
-        Hill hill = new Hill("Việt Nam");
-        int[][] key = hill.convertStringToMatrix("PễẪẼ");
-        hill.encryptFile("D://file.rar", "D://file-copy.rar", "PễẪẼ");
-//        hill.decryptFile("D://file-Copy.rar", "D://file-c.rar", "xlVA");
-       
     }
 
 }

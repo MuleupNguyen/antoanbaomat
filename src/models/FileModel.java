@@ -9,6 +9,8 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.URL;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -56,13 +58,9 @@ public class FileModel {
         }
     }
     public String path(String filename) {
-         // Lưu danh sách xuống tệp
-        String workingDir = System.getProperty("user.dir");
-        // Xây dựng đường dẫn đến thư mục "fileKeys" trong thư mục gốc của dự án
-        String fileKeysDir = workingDir + File.separator + "src" + File.separator + "fileKeys";
-
-        // Xây dựng đường dẫn đầy đủ tới tệp cần lưu
-        return fileKeysDir + File.separator + filename;
+        Path filePath = Paths.get("fileKeys/"+filename);
+        
+        return filePath.toString();
     }
     // Ghi danh sách đối tượng KeyModel vào tệp
     public void saveKeyModels(List<KeyModel> keyModels, String pathfile) {
@@ -92,7 +90,8 @@ public class FileModel {
 
     
     public static void main(String[] args) {
-
+            FileModel fileModel = new FileModel();
+            System.out.println(fileModel.path("Lap.txt"));
 
     }
  

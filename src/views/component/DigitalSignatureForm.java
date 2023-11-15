@@ -46,6 +46,7 @@ public class DigitalSignatureForm extends javax.swing.JPanel {
 
         jTextArea.setColumns(20);
         jTextArea.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jTextArea.setLineWrap(true);
         jTextArea.setRows(5);
         jScrollPane1.setViewportView(jTextArea);
 

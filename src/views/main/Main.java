@@ -43,8 +43,6 @@ public class Main extends javax.swing.JFrame {
                     showForm(new VigenereFileForm());
                 } else if (index == 0 && subIndex == 3) {
                     showForm(new HillForm());
-                } else if (index == 0 && subIndex == 4) {
-                    showForm(new DESFileForm());
                 } else if (index == 0 && subIndex == 5) {
                     showForm(new DESForm());
                 } else if (index == 0 && subIndex == 6) {

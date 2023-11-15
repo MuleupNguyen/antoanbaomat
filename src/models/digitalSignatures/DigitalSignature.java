@@ -14,7 +14,7 @@ public class DigitalSignature {
                 MD5 md5 = new MD5();
                 codeHashFile = md5.checkFile(sourcePath);
                 break;
-            case "SHA1":
+            case "SHA-1":
                 SHA1 sha1 = new SHA1();
                 codeHashFile = sha1.checkFile(sourcePath);
                 break;
