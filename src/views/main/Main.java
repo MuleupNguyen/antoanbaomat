@@ -22,6 +22,7 @@ import views.component.SHA256FileForm;
 import views.component.SHA256Form;
 import views.component.SHA512FileForm;
 import views.component.SHA512Form;
+import views.component.TwofishFileForm;
 import views.component.TwofishForm;
 import views.component.VigenereFileForm;
 import views.component.VigenereForm;
@@ -43,22 +44,22 @@ public class Main extends javax.swing.JFrame {
                     showForm(new VigenereFileForm());
                 } else if (index == 0 && subIndex == 3) {
                     showForm(new HillForm());
-                } else if (index == 0 && subIndex == 5) {
+                } else if (index == 0 && subIndex == 4) {
                     showForm(new DESForm());
-                } else if (index == 0 && subIndex == 6) {
+                } else if (index == 0 && subIndex == 5) {
                     showForm(new DESFileForm());
-                } else if (index == 0 && subIndex == 7) {
+                } else if (index == 0 && subIndex == 6) {
                     showForm(new AESForm());
-                } else if (index == 0 && subIndex == 8) {
+                } else if (index == 0 && subIndex == 7) {
                     showForm(new AESFileForm());
-                } else if (index == 0 && subIndex == 9) {
+                } else if (index == 0 && subIndex == 8) {
                     showForm(new BlowfishForm());
+                } else if (index == 0 && subIndex == 9) {
+                    showForm(new BlowfishFileForm());
                 } else if (index == 0 && subIndex == 10) {
-                    showForm(new BlowfishFileForm());
-                } else if (index == 0 && subIndex == 11) {
                     showForm(new TwofishForm());
-                } else if (index == 0 && subIndex == 12) {
-                    showForm(new BlowfishFileForm());
+                } else if (index == 0 && subIndex == 11) {
+                    showForm(new TwofishFileForm());
                 } else if (index == 1 && subIndex == 1) {
                     showForm(new RSAForm());
                 } else if (index == 1 && subIndex == 2) {

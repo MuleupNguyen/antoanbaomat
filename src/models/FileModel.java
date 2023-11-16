@@ -59,7 +59,6 @@ public class FileModel {
     }
     public String path(String filename) {
         Path filePath = Paths.get("fileKeys/"+filename);
-        
         return filePath.toString();
     }
     // Ghi danh sách đối tượng KeyModel vào tệp
