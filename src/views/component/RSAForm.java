@@ -336,15 +336,14 @@ public class RSAForm extends javax.swing.JPanel {
 
     private void jButtonEncryptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEncryptActionPerformed
         String keyPublic = jTAPublicK.getText().trim();
-        String keyPrivate = jTAPrivateK.getText().trim();
         String textInput = jTAInput.getText().trim();
 
-        if (keyPublic.isBlank() || keyPrivate.isBlank()) {
-            JOptionPane.showMessageDialog(this, "Vui lòng nhập key.", "Lỗi", JOptionPane.ERROR_MESSAGE);
+        if (keyPublic.isBlank()) {
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập Public key.", "Lỗi", JOptionPane.ERROR_MESSAGE);
         } else {
             RSA rsa = new RSA();
             try {
-                rsa.setKey(keyPublic, keyPrivate);
+                rsa.setPublicKey(keyPublic);
                 jTAOutput.setText(rsa.encrypt(textInput));
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(this, "Key không hợp lệ", "Lỗi", JOptionPane.ERROR_MESSAGE);
@@ -353,16 +352,15 @@ public class RSAForm extends javax.swing.JPanel {
     }//GEN-LAST:event_jButtonEncryptActionPerformed
 
     private void jButtonDecryptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDecryptActionPerformed
-        String keyPublic = jTAPublicK.getText().trim();
         String keyPrivate = jTAPrivateK.getText().trim();
         String textInput = jTAInput.getText().trim();
 
-        if (keyPublic.isBlank() || keyPrivate.isBlank()) {
-            JOptionPane.showMessageDialog(this, "Vui lòng nhập key.", "Lỗi", JOptionPane.ERROR_MESSAGE);
+        if (keyPrivate.isBlank()) {
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập Private key.", "Lỗi", JOptionPane.ERROR_MESSAGE);
         } else {
             RSA rsa = new RSA();
             try {
-                rsa.setKey(keyPublic, keyPrivate);
+                rsa.setPrivateKey(keyPrivate);
                 jTAOutput.setText(rsa.decrypt(textInput));
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(this, "Key không hợp lệ", "Lỗi", JOptionPane.ERROR_MESSAGE);

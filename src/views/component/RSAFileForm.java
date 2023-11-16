@@ -308,17 +308,16 @@ public class RSAFileForm extends javax.swing.JPanel {
 
     private void jButtonEncryptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEncryptActionPerformed
         String keyPublic = jTAPublicK.getText().trim();
-        String keyPrivate = jTAPrivateK.getText().trim();
         
-        if (keyPublic.isBlank() || keyPrivate.isBlank()) {
-            JOptionPane.showMessageDialog(this, "Vui lòng nhập key.", "Lỗi", JOptionPane.ERROR_MESSAGE);
+        if (keyPublic.isBlank()) {
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập Public key.", "Lỗi", JOptionPane.ERROR_MESSAGE);
         } else {
             if (sourceFile == null || desFile == null) {
                 JOptionPane.showMessageDialog(this, "Vui lòng chọn file.", "Lỗi", JOptionPane.ERROR_MESSAGE);
             } else {
                 RSA rsa = new RSA();
                 try {
-                    rsa.setKey(keyPublic, keyPrivate);
+                    rsa.setPublicKey(keyPublic);
                     rsa.fileEncrypt(sourceFile, desFile);
                     File f = new File(desFile);
                     if (f.exists()) {
@@ -326,7 +325,7 @@ public class RSAFileForm extends javax.swing.JPanel {
                         jBFileOutput.setEnabled(true);
                     }
                 } catch (Exception ex) {
-                    Logger.getLogger(DESFileForm.class.getName()).log(Level.SEVERE, null, ex);
+                    JOptionPane.showMessageDialog(this, "Key không hợp lệ", "Lỗi", JOptionPane.ERROR_MESSAGE);
                 }
             }
 
@@ -334,14 +333,14 @@ public class RSAFileForm extends javax.swing.JPanel {
     }//GEN-LAST:event_jButtonEncryptActionPerformed
 
     private void jButtonDecryptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDecryptActionPerformed
- String keyPublic = jTAPublicK.getText().trim();
+
         String keyPrivate = jTAPrivateK.getText().trim();
-        if (keyPublic.isBlank() || keyPrivate.isBlank()) {
-            JOptionPane.showMessageDialog(this, "Vui lòng nhập key.", "Lỗi", JOptionPane.ERROR_MESSAGE);
+        if (keyPrivate.isBlank()) {
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập Private key.", "Lỗi", JOptionPane.ERROR_MESSAGE);
         } else {
             RSA rsa = new RSA();
             try {
-                rsa.setKey(keyPublic, keyPrivate);
+                rsa.setPrivateKey(keyPrivate);
                 File fSource = new File(sourceFile);
                 FileModel fileModel = new FileModel();
 
@@ -354,7 +353,7 @@ public class RSAFileForm extends javax.swing.JPanel {
                     jBFileOutput.setEnabled(true);
                 }
             } catch (Exception ex) {
-                Logger.getLogger(AESFileForm.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(this, "Key không hợp lệ", "Lỗi", JOptionPane.ERROR_MESSAGE);
             }
         }
     }//GEN-LAST:event_jButtonDecryptActionPerformed
