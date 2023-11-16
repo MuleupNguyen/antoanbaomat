@@ -236,10 +236,12 @@ public class RSAForm extends javax.swing.JPanel {
         jLabel3.setText("Key Private:");
 
         jTAPublicK.setColumns(20);
+        jTAPublicK.setLineWrap(true);
         jTAPublicK.setRows(3);
         jScrollPane1.setViewportView(jTAPublicK);
 
         jTAPrivateK.setColumns(20);
+        jTAPrivateK.setLineWrap(true);
         jTAPrivateK.setRows(3);
         jScrollPane4.setViewportView(jTAPrivateK);
 
@@ -273,14 +275,14 @@ public class RSAForm extends javax.swing.JPanel {
                     .addComponent(jLabel3)
                     .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 443, Short.MAX_VALUE)
-                    .addComponent(jScrollPane4))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 443, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(32, 32, 32)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jBCreate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jBDelete, javax.swing.GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE))
-                .addContainerGap(59, Short.MAX_VALUE))
+                .addGap(59, 59, 59))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

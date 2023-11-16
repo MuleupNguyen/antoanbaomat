@@ -524,6 +524,7 @@ public class VigenereForm extends javax.swing.JPanel {
         KeyModel keyTarget = dialog.getKeyTarget();
         if (keyTarget != null) {
             jTFKey.setText(keyTarget.getKey());
+            jCBSizeKey.setSelectedItem(keyTarget.getKeySize());
         }
     }//GEN-LAST:event_jButtonUpKeyActionPerformed
 

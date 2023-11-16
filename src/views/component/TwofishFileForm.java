@@ -505,6 +505,9 @@ public class TwofishFileForm extends javax.swing.JPanel {
         KeyModel keyTarget = dialog.getKeyTarget();
         if (keyTarget != null) {
             jTFKey.setText(keyTarget.getKey());
+            jCBSizeKey.setSelectedItem(keyTarget.getKeySize());
+            jCBMode.setSelectedItem(keyTarget.getMode());
+            jCBPadding.setSelectedItem(keyTarget.getPadding());
         }
     }//GEN-LAST:event_jButtonUpKeyActionPerformed
 

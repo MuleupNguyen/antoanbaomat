@@ -238,6 +238,7 @@ public class RSAFileForm extends javax.swing.JPanel {
         });
 
         jTAPublicK.setColumns(20);
+        jTAPublicK.setLineWrap(true);
         jTAPublicK.setRows(3);
         jScrollPane1.setViewportView(jTAPublicK);
 
@@ -248,6 +249,7 @@ public class RSAFileForm extends javax.swing.JPanel {
         jLabel2.setText("Key Public:");
 
         jTAPrivateK.setColumns(20);
+        jTAPrivateK.setLineWrap(true);
         jTAPrivateK.setRows(3);
         jScrollPane4.setViewportView(jTAPrivateK);
 

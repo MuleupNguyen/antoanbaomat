@@ -400,6 +400,7 @@
         <Component class="javax.swing.JTextArea" name="jTAPublicK">
           <Properties>
             <Property name="columns" type="int" value="20"/>
+            <Property name="lineWrap" type="boolean" value="true"/>
             <Property name="rows" type="int" value="3"/>
           </Properties>
         </Component>
@@ -431,6 +432,7 @@
         <Component class="javax.swing.JTextArea" name="jTAPrivateK">
           <Properties>
             <Property name="columns" type="int" value="20"/>
+            <Property name="lineWrap" type="boolean" value="true"/>
             <Property name="rows" type="int" value="3"/>
           </Properties>
         </Component>
